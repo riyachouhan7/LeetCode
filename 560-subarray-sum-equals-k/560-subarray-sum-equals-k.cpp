@@ -10,8 +10,8 @@ public:
                 count++;
             if(p.find(sum-k)!=p.end())
                 count+=p[sum-k];
-            p[sum]++;
-        }  
+                p[sum]++;
+            }  
         return count;
     }
 };
