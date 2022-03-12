@@ -20,21 +20,12 @@ public:
         
         if(head==NULL)
             return NULL;
-        
-        // temporary (copied) head node
+
         Node* temp=head;
-        
-        // 1st Pass
         
         while(temp!=NULL)
         {
-             // Cloned node with same val as head
             Node* newnode= new Node(temp->val);
-            
-            // Insert the cloned node next to the original node
-            // If A->B->C is the original linked list,
-            // Linked list after weaving cloned nodes would be
-            // A->A'->B->B'->C->C'
             
             newnode->next=temp->next;
             temp->next=newnode;
