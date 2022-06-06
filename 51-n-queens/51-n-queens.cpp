@@ -1,57 +1,38 @@
 class Solution {
 public:
-    vector<vector<string>> solveNQueens(int n) {
-        vector<vector<string>> result;
-        vector<string> temp(n, string(n, '.'));
-        solveNQueens(result, temp, 0, n);
-        return result;
-    }
-    void solveNQueens(vector<vector<string>> &result, vector<string> &temp, int cur_row, int left) {
-        // goal : we have no queens left, all queens are put in a proper pos
-        if(cur_row == temp.size()) {
-            if(left == 0) {
-                result.push_back(temp);
-            }
-            return;
+    vector<vector<string>> ans;
+    
+    bool can(int r, int c, int n, vector<string> &res){
+        for(int i=0; i<c; i++){
+            if(res[r][i]=='Q') return false;
         }
-        // constrain, before modifying we should make sure this is a valid input
-        for(int col = 0; col < temp.size(); ++col) {
-            if(helper(temp, cur_row, col)) {
-                temp[cur_row][col] = 'Q';
-                solveNQueens(result, temp, cur_row+1, left-1);
-                temp[cur_row][col] = '.';
-            }
+        for(int i=1; c-i>=0 && r-i>=0; i++){
+            if(res[r-i][c-i]=='Q') return false;
         }
-        // no possible solution
-        return;
-    }
-    bool helper(vector<string> &temp, int row, int col) {
-        // check row
-        for(int i = 0; i < row; ++i) {
-            if(temp[i][col] == 'Q') {
-                return false;
-            }
+        for(int i=1; c-i>=0 && r+i<n; i++){
+            if(res[r+i][c-i]=='Q') return false;
         }
-        
-        // check col
-        for(int i = 0; i < col; ++i) {
-            if(temp[row][i] == 'Q') {
-                return false;
-            }
-        }
-        
-        // check main diagnoal
-        int r = row-1, c = col-1;
-        while(r >= 0 && c >= 0) {
-            if(temp[r--][c--] == 'Q') return false;
-        }
-        
-        // check auxiliary diag
-        r = row-1, c = col+1;
-        while(r >= 0 && c < temp.size()) {
-            if(temp[r--][c++] == 'Q') return false;
-        }
-        
         return true;
     }
+    
+    void rec(int col, int n, vector<string> &res){
+        if(col==n){
+            ans.push_back(res);
+            return;
+        }
+        
+        for(int row=0; row<n; row++){
+            if(can(row,col,n,res)){
+                res[row][col]='Q';
+                rec(col+1,n,res);
+                res[row][col]='.';
+            }    
+        }
+    }
+    
+    vector<vector<string>> solveNQueens(int n) {
+        vector<string> res(n,string(n,'.'));
+        rec(0,n,res);
+        return ans;
+    }  
 };
