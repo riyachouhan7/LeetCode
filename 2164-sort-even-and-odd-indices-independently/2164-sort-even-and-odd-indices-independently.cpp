@@ -12,23 +12,21 @@ public:
         sort(even.begin(),even.end());
         sort(odd.begin(),odd.end(),greater<int>());
         
-        int oddj=0,eveni=0;
-        int i=0;
-        while(oddj<odd.size() || eveni<even.size())
+        int i=0,j=0;
+        
+        vector<int> ans;
+        
+        while(i<odd.size() || j<even.size())
         {
-            if(eveni<even.size())
+            if(j<even.size())
             {
-                nums[i]=even[eveni];
-                eveni++;
-                i++;
+                ans.push_back(even[j++]);
             }
-            if(oddj<odd.size())
+            if(i<odd.size())
             {
-                nums[i]=odd[oddj];
-                oddj++;
-                i++;
+               ans.push_back(odd[i++]);
             }
         }
-        return nums;  
+        return ans;  
     }
 };
