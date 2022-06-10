@@ -1,26 +1,38 @@
-class Solution
-{
-    void solve(int idx, vector<int> &nums,vector<vector<int>> &ans)
+class Solution {
+public:
+    
+    vector<vector<int>> result;
+    vector<int> pairs;
+    map<int,bool> flag;
+    int n;
+    
+    vector<vector<int>> permute(vector<int>& nums)
     {
-        if (idx == nums.size())
+        n=nums.size();
+        solve(nums);
+        return result;
+        
+    }
+    
+    void solve(vector<int> &nums)
+    {
+        if(pairs.size()==n) 
+            result.push_back(pairs);
+        
+        else
         {
-            ans.push_back(nums);
-            return;
-        }
-
-        for (int i = idx; i < nums.size(); i++)
-        {
-            swap(nums[idx],nums[i]);
-            solve(idx+1,nums,ans);
-            swap(nums[idx],nums[i]);
+            for(int i=0;i<n;i++)
+            {
+                if(!flag[nums[i]])
+                {
+                    pairs.push_back(nums[i]);
+                    flag[nums[i]]=true;
+                    solve(nums);
+                    pairs.pop_back();
+                    flag[nums[i]]=false;
+                }
+            }
         }
     }
-
-    public:
-        vector<vector< int>> permute(vector<int> &nums)
-        {
-            vector<vector<int>>ans;
-            solve(0,nums,ans);
-            return ans;
-        }
+    
 };
