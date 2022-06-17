@@ -11,12 +11,12 @@
  */
 class Solution {
 public:
-    int noCameras = 0;
+    int noofCameras = 0;
     int minCameraCover(TreeNode* root) 
     {
         if(Camera(root)=="want")
-            noCameras++;
-        return noCameras;
+            noofCameras++;
+        return noofCameras;
     }
     string Camera(TreeNode* root)
     {
@@ -27,7 +27,7 @@ public:
         
         if(left=="want" || right=="want")
         {
-            noCameras++;
+            noofCameras++;
             return "provide";
         }
         else if(left=="provide" || right=="provide")
