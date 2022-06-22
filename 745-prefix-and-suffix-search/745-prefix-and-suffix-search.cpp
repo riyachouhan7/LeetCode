@@ -22,9 +22,9 @@ public:
             {
                 string pre = word.substr(0,j);
                 
-                for(int k=0; k<wordsize; k++) 
+                for(int k=0; k<word.size(); k++) 
                 {
-                    string suff = word.substr(k, wordsize);
+                    string suff = word.substr(k, word.size());
                     mp[pre + "|" + suff] = i+1;
                 }
             }
