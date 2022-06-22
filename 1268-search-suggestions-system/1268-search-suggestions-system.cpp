@@ -1,40 +1,26 @@
 class Solution {
 public:
-
     vector<vector<string>> suggestedProducts(vector<string>& products, string searchWord) {
-        
-        vector<vector<string>>res;
         sort(products.begin(),products.end());
-        int n=products.size();
-        for(int i=0;i<searchWord.size();i++)
+        vector<vector<string>> v1;
+        
+        for(int i=1;i<=searchWord.size();i++)
         {
-            string s=searchWord.substr(0,i+1);
-            int low=0,temp=0,high=n-1;
-            vector<string>ans;
-            while(low<=high)
+            string s1=searchWord.substr(0,i);
+            int count=0;
+            vector<string> v2;
+            for(int j=0;j<products.size();j++)
             {
-                int mid=(low+high)/2;
-                if(products[mid]>=s)
-                {
-                    temp=mid;
-                    high=mid-1;
+                string s2=products[j].substr(0,i);
+                if(s1==s2){
+                     v2.push_back(products[j]);
+                     count++; 
                 }
-                else
-                {
-                   low=mid+1;
-                }
-            }
-
-            for(int j=temp;j<temp+3 and j<n;j++)
-            {
-                if(products[j].find(s)==0)
-                    ans.push_back(products[j]);
-                else
+                if(count==3) 
                     break;
             }
-            res.push_back(ans);
+            v1.push_back(v2);
         }
-        return res;
-        
+        return v1;
     }
 };
