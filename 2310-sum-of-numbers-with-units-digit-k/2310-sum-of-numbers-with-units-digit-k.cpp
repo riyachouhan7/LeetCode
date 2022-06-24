@@ -13,15 +13,3 @@ public:
     }
 };
 
-/*int minimumNumbers(int num, int k)
-   {
-       if(num==0) return 0; // base case;
-       
-       for(int n=1;n<=10 && n*k<=num ;n++)  // n is number of elements in set
-       {
-           if((num-n*k)%10 == 0)   
-           return n;
-               
-       }
-       return -1;
-   }*/
