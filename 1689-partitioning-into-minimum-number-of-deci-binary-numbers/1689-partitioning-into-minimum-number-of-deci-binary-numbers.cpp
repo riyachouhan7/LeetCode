@@ -1,12 +1,11 @@
 class Solution {
 public:
     int minPartitions(string n) {
-        int s = n.size();
-        int ans = 0;
-        for(char x : n)
+        int ans=0;
+        for(char c : n)
         {
-            int curr = x-48;
-            ans = max(ans,curr);
+            int curr = c - 48;
+            ans = max(ans, curr);
         }
         return ans;
     }
