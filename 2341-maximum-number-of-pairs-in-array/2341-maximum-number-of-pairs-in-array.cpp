@@ -5,7 +5,7 @@ public:
         map<int,int>m;
         int size = nums.size();
         
-        int countPairs=0,leftOvers=0;
+        vector<int> v(2,0);
         for(int i=0; i<size; i++)
         {
             m[nums[i]]++;
@@ -13,9 +13,9 @@ public:
         
         for(auto x : m)
         {
-            countPairs += x.second/2;
-            leftOvers += x.second%2;
+            v[0] += x.second/2;
+            v[1] += x.second%2;
         }
-        return {countPairs,leftOvers};
+        return v;
     }
 };
