@@ -2,18 +2,16 @@ class Solution {
 public:
     int combinationSum4(vector<int>& nums, int target) {
         
-        sort(nums.begin(),nums.end());
-        
-        vector<unsigned long long> dp (target+1, 0); 
+        vector<unsigned long long> dp (target+1, 0);
         
         dp[0] = 1;
         
         for(int i = 1; i <= target; i++)
         {
-            for(auto j : nums)
+            for(int j = 0; j < nums.size(); j++)
             {
-                if(i - j >= 0) 
-                    dp[i] += dp[i - j];
+                if(i - nums[j] >= 0) 
+                    dp[i] += dp[i - nums[j]];
             }
         }
         return dp[target];
