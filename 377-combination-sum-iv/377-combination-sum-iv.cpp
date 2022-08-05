@@ -2,6 +2,8 @@ class Solution {
 public:
     int combinationSum4(vector<int>& nums, int target) {
         
+        sort(nums.begin(),nums.end());
+        
         vector<unsigned long long> dp (target+1, 0); 
         
         dp[0] = 1;
