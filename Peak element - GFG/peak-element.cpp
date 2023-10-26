@@ -15,20 +15,21 @@ class Solution
     int peakElement(int arr[], int n)
     {
        // Your code here
-       int low = 0;
-       int high = n-1;
-       while(low<high)
-       {
-           int mid = (low+high)/2;
-           if(arr[mid]>arr[mid+1])
-           {
-               high = mid;
-           }
-           else{
-               low = mid +1;
-           }
-       }
-       return low;
+       int maxi=0;
+        for(int i=0;i<n;i++)
+        {
+            if(maxi < arr[i])
+            {
+                maxi=arr[i];
+            }
+        }
+        for(int i=0;i<n;i++)
+        {
+            if(arr[i]==maxi)
+            {
+                return i;
+            }
+        }
     }
 };
 
