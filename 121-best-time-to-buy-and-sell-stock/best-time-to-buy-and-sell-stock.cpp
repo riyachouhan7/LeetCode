@@ -9,8 +9,6 @@ public:
         {
             buying = min(buying, prices[i]);
             selling = prices[i] - buying;
-            //maxProfit = max(maxProfit, sellingCost);
-            // buying = min(buying, prices[i]);
             maxProfit = max(maxProfit, selling);
         }
         return maxProfit;
