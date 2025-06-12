@@ -29,29 +29,20 @@
 class Solution {
 public:
     long long maximumImportance(int n, vector<vector<int>>& roads) {
-        long long sum=0;
-        vector<int>indegree(n,0);
-        for(int i=0;i<roads.size();i++){
-            indegree[roads[i][0]]++;
-            indegree[roads[i][1]]++;
+        vector<int>degree(n,0);
+        for(auto edge: roads){
+            int u = edge[0], v = edge[1];
+            degree[u]++;
+            degree[v]++;
         }
-        vector<int>val(n);
-        vector<pair<int,int>>v;
-        for(int i=0;i<n;i++){
-            v.push_back({indegree[i],i});
-        }
-        sort(v.begin(),v.end());
-        reverse(v.begin(),v.end());
-        int k=n;
-        for(int i=0;i<n;i++)
+        sort(degree.begin(),degree.end());
+        long long val = 1;
+        long long ans=0;
+        for(auto deg : degree)
         {
-           int node=v[i].second;
-           val[node]=k;
-           k--;
+            ans += deg * val;
+            val++;
         }
-        for(int i=0;i<roads.size();i++){
-            sum=sum+val[roads[i][0]]+val[roads[i][1]];
-        }
-        return sum;
+        return ans;
     }
 };
