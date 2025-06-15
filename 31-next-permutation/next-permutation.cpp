@@ -27,7 +27,7 @@ public:
         // find out the next greater element at right than arr[index]
         // traversing from right would be beneficial
         // after getting that element swap it with the arr[index]
-        for(int i = n-1; i>=0; i--){
+        for(int i = n-1; i>index; i--){
             if(arr[i] > arr[index]) {
                 swap(arr[index], arr[i]);
                 break;
