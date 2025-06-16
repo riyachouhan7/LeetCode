@@ -2,7 +2,7 @@ class Solution {
 public:
     int trap(vector<int>& arr) {
         int left = 0, right = arr.size() - 1;
-        int leftMax = INT_MIN, rightMax = 0;
+        int leftMax = INT_MIN, rightMax = INT_MIN;
         int water = 0;
 
         while (left < right) {
