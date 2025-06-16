@@ -1,43 +1,38 @@
 class Solution {
 public:
     int t[1001][1001];
-    
-    bool solve(string &s, int l, int r){
-        if(l >= r) 
-            return 1;
+    bool solve(int i,int j,string &s)
+    {
+        if(i>=j) return 1;
 
-        if(t[l][r] != -1){
-            return t[l][r];
+        if(t[i][j]!=-1) return t[i][j];
+
+        if(s[i] == s[j])
+        {
+            return t[i][j] = solve(i+1, j-1, s);
         }
-
-        if(s[l] == s[r]) {
-            return t[l][r] = solve(s, l+1, r-1);
-        }
-
-        return t[l][r] = false;
+        return t[i][j] = 0;
     }
-    
+
     string longestPalindrome(string s) {
         int n = s.length();
-        
-        int maxlen = INT_MIN;
+        int maxLen = INT_MIN;
         int sp = 0;
-
         memset(t, -1, sizeof(t));
-
-        for(int i = 0; i < n; i++){
-            for(int j = i; j < n; j++){
-                
-                if(solve(s, i, j)) {
-                    if(j-i+1 > maxlen){
+        for(int i=0;i<n;i++)
+        {
+            for(int j=i;j<n;j++)
+            {
+                if(solve(i, j, s) == true)
+                {
+                    if(j-i+1> maxLen)
+                    {
+                        maxLen = j-i+1;
                         sp = i;
-                        maxlen = j-i+1;
                     }
                 }
-                
             }
         }
-
-        return s.substr(sp, maxlen);
-    }
+        return s.substr(sp, maxLen);
+    } 
 };
