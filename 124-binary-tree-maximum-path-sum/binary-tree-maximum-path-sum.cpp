@@ -14,8 +14,8 @@ public:
     int help(TreeNode* node, int &maxi)
     {
         if(node == NULL) return 0;
-        int left = max(0, help(node->left,maxi));
-        int right = max(0, help(node->right,maxi));
+        int left = max(0, help(node->left, maxi));
+        int right = max(0, help(node->right, maxi));
         maxi = max(maxi , node->val + left + right);
         return max(left, right) + node->val;
     }
