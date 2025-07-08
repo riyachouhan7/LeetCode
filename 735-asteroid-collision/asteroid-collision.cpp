@@ -14,7 +14,8 @@ public:
                 } 
                 else if(sum > 0)
                 {
-                    a = 0;
+                    a = 0;//break from loop
+                    break;
                 }
                 else 
                 {
