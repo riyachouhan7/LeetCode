@@ -1,23 +1,35 @@
 class Solution {
 public:
-    int maximalSquare(vector<vector<char>>& matrix) {
-        int rows = matrix.size();
-        int cols = matrix[0].size();
-        vector<vector<int>> dp(rows, vector<int>(cols, 0));
-        int maxSide = 0;
+    int rows, cols;
+    int maxSide;
+    vector<vector<int>> dp;
 
-        // Fill the dp table
+    int dfs(int i, int j, vector<vector<char>>& matrix) {
+        if (i >= rows || j >= cols) return 0;
+        if (dp[i][j] != -1) return dp[i][j];
+
+        if (matrix[i][j] == '1') {
+            dp[i][j] = 1 + min({dfs(i+1, j, matrix), dfs(i, j+1, matrix), dfs(i+1, j+1, matrix)});
+            maxSide = max(maxSide, dp[i][j]);
+        } else {
+            dp[i][j] = 0;
+        }
+
+        return dp[i][j];
+    }
+
+    int maximalSquare(vector<vector<char>>& matrix) {
+        rows = matrix.size();
+        cols = matrix[0].size();
+        maxSide = 0;
+        dp.assign(rows, vector<int>(cols, -1)); // initialize memoization table
+
         for (int i = 0; i < rows; ++i) {
             for (int j = 0; j < cols; ++j) {
-                if (matrix[i][j] == '1') {
-                    if (i == 0 || j == 0)
-                        dp[i][j] = 1; // first row or first column
-                    else
-                        dp[i][j] = 1 + min({dp[i-1][j], dp[i][j-1], dp[i-1][j-1]});
-                    maxSide = max(maxSide, dp[i][j]);
-                }
+                dfs(i, j, matrix);
             }
         }
+        
         return maxSide * maxSide;
     }
 };
