@@ -1,10 +1,10 @@
 class Solution {
 public:
-    bool solve(vector<int>& time, int total, long long n){
+    bool solve(vector<int>& time, int totalTrips, long long n){
         long long sum = 0;
         for(auto i : time) {
             sum += n / i;
-            if(sum >= total) return true;
+            if(sum >= totalTrips) return true;
         }
 
         return false;
