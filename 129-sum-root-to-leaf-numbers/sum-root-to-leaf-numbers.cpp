@@ -11,24 +11,22 @@
  */
 class Solution {
 public:
-    void dfs(TreeNode* node, string currentPath, int &totalSum) {
-        if (!node) return;
+    void dfs(TreeNode* root, int currentNum, int &totalSum) {
+        if(!root) return;
 
-        currentPath += to_string(node->val);
+        currentNum = currentNum * 10 + root->val;
 
-        // If leaf node
-        if (!node->left && !node->right) {
-            totalSum += stoi(currentPath); // Convert path string to integer
-            return;
+        if(!root->left && !root->right)
+        {
+            totalSum += currentNum;
         }
 
-        dfs(node->left, currentPath, totalSum);
-        dfs(node->right, currentPath, totalSum);
+        dfs(root->left, currentNum, totalSum);
+        dfs(root->right, currentNum, totalSum);
     }
-
     int sumNumbers(TreeNode* root) {
         int totalSum = 0;
-        dfs(root, "", totalSum);
+        dfs(root, 0, totalSum);
         return totalSum;
     }
 };
