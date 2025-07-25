@@ -6,11 +6,12 @@ public:
         int maxIndex = 0;
         for(int i=0;i<n;i++)
         {   
-            if(maxIndex < i)
+            if(i > maxIndex)
             {
                 return false;
             }
             maxIndex = max(maxIndex, i + nums[i]);
+            if(maxIndex > n-1) break;
         }
         return true;
     }
