@@ -1,32 +1,48 @@
 class Solution {
 public:
-    vector<string> restoreIpAddresses(string s) {
-        vector<string> result;
-        vector<string> path;
-        backtrack(s, 0, 0, path, result);
-        return result;
+    int n;
+    vector<string> result;
+    
+    bool isValid(string str) {
+        if(str[0] == '0')
+            return false;
+        
+        int val = stoi(str);
+        
+        return val <= 255;
     }
     
-    void backtrack(string& s, int idx, int dots, vector<string>& path, vector<string>& result) {
-        if (dots == 4 && idx == s.size()) {
-            // Form the IP from path
-            result.push_back(path[0] + "." + path[1] + "." + path[2] + "." + path[3]);
+    void solve(string& s, int idx, int part, string curr) {
+        if(idx == n && part == 4) {
+            result.push_back(curr.substr(0, curr.length()-1));
             return;
         }
-        if (dots > 4) return; // invalid
         
-        for (int len = 1; len <= 3; len++) {
-            if (idx + len > s.size()) break;
-            string segment = s.substr(idx, len);
-            
-            // Check validity
-            if ((segment[0] == '0' && segment.length() > 1) || stoi(segment) > 255) {
-                continue;
-            }
-            
-            path.push_back(segment);
-            backtrack(s, idx + len, dots + 1, path, result);
-            path.pop_back();
+        if(idx+1 <= n)
+            solve(s, idx+1, part+1, curr + s.substr(idx, 1) + ".");
+        
+        if(idx+2 <= n && isValid(s.substr(idx, 2))) {
+            solve(s, idx+2, part+1, curr + s.substr(idx, 2) + ".");
         }
+        
+        if(idx+3 <= n && isValid(s.substr(idx, 3))) {
+            solve(s, idx+3, part+1, curr + s.substr(idx, 3) + ".");
+        }
+    }
+    
+    vector<string> restoreIpAddresses(string s) {
+        result.clear();
+        
+        n = s.length();
+        
+        if(n > 12)
+          return result;
+      
+        int part = 0;
+        string curr = "";
+        
+        solve(s, 0, part, curr);
+        return result;
+        
     }
 };
