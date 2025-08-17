@@ -14,7 +14,7 @@ public:
             }
         }
 
-        priority_queue<P, vector<P>> pq;
+        priority_queue<P> pq;
         for(char ch ='a'; ch <= 'z'; ch++)
         {
             if(count[ch-'a']>0)
