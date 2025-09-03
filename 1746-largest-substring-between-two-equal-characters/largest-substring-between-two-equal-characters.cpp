@@ -1,18 +1,17 @@
 class Solution {
 public:
     int maxLengthBetweenEqualCharacters(string s) {
-        unordered_map<char, int> firstIndex;
+        unordered_map<char, int> mp;
         int maxLen = -1;
 
         for (int i = 0; i < s.size(); i++) {
-            if (firstIndex.find(s[i]) != firstIndex.end()) {
+            if (mp.find(s[i]) != mp.end()) {
                 // already seen → compute length
-                maxLen = max(maxLen, i - firstIndex[s[i]] - 1);
+                maxLen = max(maxLen, i - mp[s[i]] - 1);
             } else {
-                firstIndex[s[i]] = i;
+                mp[s[i]] = i;
             }
         }
-
         return maxLen;
     }
 };
