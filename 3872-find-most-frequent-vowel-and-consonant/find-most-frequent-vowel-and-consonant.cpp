@@ -9,10 +9,10 @@ public:
         }
         for(char i='a';i<='z';i++){
             if(i=='a'||i=='e'||i=='i'||i=='o'||i=='u'){
-                vow = max(vow,mp[i]);
+                vow = max(vow, mp[i]);
             }
             else{
-                cons = max(cons,mp[i]);
+                cons = max(cons, mp[i]);
             }
         }
 
