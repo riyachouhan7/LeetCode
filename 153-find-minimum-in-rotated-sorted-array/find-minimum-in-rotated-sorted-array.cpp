@@ -1,27 +1,17 @@
 class Solution {
 public:
     int findMin(vector<int>& nums) {
-        int n = nums.size();
-        int start = 0;
-        int end = nums.size()-1;
-
-        while(start <= end)
-        {
-            if(nums[start] < nums[end]) return nums[start];
-            int mid = start + (end - start)/2;
-            int prev = (mid+ n - 1) % n;
-            int next = (mid + 1) % n;
-
-            if(nums[mid] <= nums[prev] && nums[mid] <= nums[next])
-                return nums[mid];
-
-            else if(nums[mid] < nums[start]) {
-                end = mid - 1;
+        int mid;
+        int l = 0, r = nums.size()-1;
+        while(l < r) {
+            mid = l + (r-l)/2;
+          
+            if(nums[mid] > nums[r]) { //something wrong on right side. Possibly my answer lies in right side.
+                l = mid+1;            //move right (Discarding mid, because it's greater than nums[r], so it can't be the minimum element)
+            } else {
+                r = mid;
             }
-            else {
-                start = mid + 1;
-            }
-        }   
-        return -1;
+        }
+        return nums[l];
     }
 };
