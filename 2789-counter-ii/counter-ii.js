@@ -5,17 +5,16 @@
 var createCounter = function(init) {
     let val = init;
     return {
-        increment: function() {
+        increment() {
             return ++val;
         },
-        reset: function() {
-            val = init;
-            return val;
-        },
-        decrement: function() {
+        decrement() {
             return --val;
+        },
+        reset() {
+            return (val = init);
         }
-    }
+    };
 };
 
 /**
